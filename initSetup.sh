@@ -38,7 +38,16 @@ do
 done
 }
 
+fFILERUN(){
+for FILERUN in $FILELIST ;
+do
+   ${DIRSHELL}/${FILELIST}
+done
+}
+
 fMKDIR
 fMVFILE
+fFILERUN
+
 shopt +s nullglob
 exit
