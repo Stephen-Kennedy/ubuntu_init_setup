@@ -44,7 +44,7 @@ done
 fFILERUN(){
 for FILERUN in $FILELIST ;
 do
-   ${DIRSHELL}/${FILELIST}
+   ${DIRSHELL}/${FILELIST} || 
 done
 }
 
@@ -52,5 +52,4 @@ fMKDIR
 fMVFILE
 fFILERUN
 
-shopt +s nullglob
-exit
+exit 0
