@@ -1,11 +1,11 @@
-!/bin/bash
+#!/bin/bash
 logger initiate custom setup.sh
 FOLDER=""
 DIRCUSTOM=/bin/custom
 DIRCUSTOMLOG=${DIRCUSTOM}/log
 DIRSHELL=${DIRCUSTOM}/shell
 FILELIST=("updates.sh")
-
+PWD=$(pwd)
 shopt -s nullglob
 
 #function to check and see if directory exists.
@@ -31,9 +31,9 @@ done
 fMVFILE(){
 for DIRFILE in $FILELIST ;
 do
-   if [ -f ${pwd}/${FILELIST} ]
+   if [ -f ${PWD}/${FILELIST} ]
       then
-         cp ${pwd}/${FILELIST} ${DIRSHELL}/$FILELIST
+         cp ${PWD}/${FILELIST} ${DIRSHELL}/$FILELIST
    fi
 done
 }
