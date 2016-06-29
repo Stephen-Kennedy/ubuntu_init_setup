@@ -5,7 +5,7 @@ DIRCUSTOM=/bin/custom
 DIRCUSTOMLOG=${DIRCUSTOM}/log
 DIRSHELL=${DIRCUSTOM}/shell
 FILELIST=("updates.sh")
-PWDIS=/home/installBash  #must initiate setup from the /home/installBash directory
+
 shopt -s nullglob
 
 #function to check and see if directory exists.
@@ -31,9 +31,9 @@ done
 fMVFILE(){
 for DIRFILE in $FILELIST ;
 do
-   if [ -f ${PWDIS}/${FILELIST} ]
+   if [ -f ${pwd}/${FILELIST} ]
       then
-         cp ${PWDIS}/${FILELIST} ${DIRSHELL}/$FILELIST
+         cp ${pwd}/${FILELIST} ${DIRSHELL}/$FILELIST
    fi
 done
 }
