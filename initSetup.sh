@@ -6,7 +6,6 @@ DIRCUSTOMLOG=${DIRCUSTOM}/log
 DIRSHELL=${DIRCUSTOM}/shell
 FILELIST=("updates.sh")
 PWD=$(pwd)
-shopt -s nullglob
 
 #function to check and see if directory exists.
 #If not, creates directory from fMKDIR list
@@ -31,10 +30,12 @@ done
 fMVFILE(){
 for DIRFILE in $FILELIST ;
 do
+shopt -s nullglob
    if [ -f ${PWD}/${FILELIST} ]
       then
          cp ${PWD}/${FILELIST} ${DIRSHELL}/$FILELIST
    fi
+shopt +s nullglob
 done
 }
 
