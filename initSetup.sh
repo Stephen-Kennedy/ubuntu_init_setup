@@ -34,6 +34,8 @@ shopt -s nullglob
    if [ -f ${PWD}/${FILELIST} ]
       then
          cp ${PWD}/${FILELIST} ${DIRSHELL}/$FILELIST
+         #adds shell to daily cronjob
+         cp ${PWD}/${FILELIST} /etc/cron.daily/$FILELIST 
    fi
 shopt +s nullglob
 done
