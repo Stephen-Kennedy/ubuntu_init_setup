@@ -12,7 +12,7 @@ PWD=$(pwd)
 fCHECK(){
    if [ ! -d ${FOLDER} ]
       then
-         mkdir ${FOLDER}
+         mkdir ${FOLDER} || return 1
    fi
 }
 
@@ -28,14 +28,14 @@ done
 
 #function to move any shell files to ~/shell/ folder
 fMVFILE(){
-for DIRFILE in $FILELIST ;
+for DIRFILE in $FILELIST ; || return 2
 do
 shopt -s nullglob
    if [ -f ${PWD}/${FILELIST} ]
       then
-         cp ${PWD}/${FILELIST} ${DIRSHELL}/$FILELIST
+         cp ${PWD}/${FILELIST} ${DIRSHELL}/$FILELIST || return 3
          #adds shell to daily cronjob
-         cp ${PWD}/${FILELIST} /etc/cron.daily/$FILELIST 
+         cp ${PWD}/${FILELIST} /etc/cron.daily/$FILELIST || return 4
    fi
 shopt +s nullglob
 done
@@ -44,12 +44,23 @@ done
 fFILERUN(){
 for FILERUN in $FILELIST ;
 do
-   ${DIRSHELL}/${FILELIST} || 
+   ${DIRSHELL}/${FILELIST} || return 5
 done
+}
+
+fMail(){
+ if [ $? -ne 0 ]
+   then
+      echo "mail error"
+      $MAIL -s "Error with ${HOSTNAME} during initSetup.sh." $TO 
+fi
+}
+   
 }
 
 fMKDIR
 fMVFILE
 fFILERUN
+fMail
 
 exit 0
