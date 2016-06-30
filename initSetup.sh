@@ -28,16 +28,14 @@ done
 
 #function to move any shell files to ~/shell/ folder
 fMVFILE(){
-for DIRFILE in $FILELIST ; || return 2
+for DIRFILE in $FILELIST ;
 do
-shopt -s nullglob
-   if [ -f ${PWD}/${FILELIST} ]
+   if [ -f ${PWD}/${FILELIST} ]  || return 2
       then
          cp ${PWD}/${FILELIST} ${DIRSHELL}/$FILELIST || return 3
          #adds shell to daily cronjob
          cp ${PWD}/${FILELIST} /etc/cron.daily/$FILELIST || return 4
    fi
-shopt +s nullglob
 done
 }
 
