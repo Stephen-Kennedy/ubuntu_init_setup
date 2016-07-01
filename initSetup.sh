@@ -1,7 +1,7 @@
-#!/bin/bash
+!/bin/bash
 #This script allows for dist-upgrade - auto-remove
 #Author: Stephen J Kennedy
-#version 1.0
+#version 1.1
 #DEBUG used with -x (reports shell name, line number, and associated function)
 PS4='+ $BASH_SOURCE : $LINENO : ${FUNCNAME[0]} ()'
 FOLDER=""
@@ -9,7 +9,7 @@ DIRCUSTOM=/bin/custom
 DIRCUSTOMLOG=${DIRCUSTOM}/log
 DIRSHELL=${DIRCUSTOM}/shell
 FILEADDON=addonInstall.sh
-FILE1=updates.sh ; FILE2=dist-upgrade.sh
+DISTUPGRADE=auto_dist_upgrade.sh
 PWD=$(pwd)
 
 #function to check and see if directory exists.
@@ -23,47 +23,43 @@ fCHECK(){
 
 #function to update the folder list to fCHECK
 fMKDIR(){
-for DIRFOLDER in $DIRCUSTOM $DIRCUSTOMLOG $DIRSHELL ;
-do
-   FOLDER=${DIRFOLDER}
-   fCHECK
-done
+   for DIRFOLDER in $DIRCUSTOM $DIRCUSTOMLOG $DIRSHELL ;
+   do
+      FOLDER=${DIRFOLDER}
+      fCHECK
+   done
 }
 
-#function to move any shell files to ~/shell/ folder
+#Function to move any shell files to ~/shell/ folder
 fMVFILE(){
-for FILES in $FILEMV
-do
-   mv $FILES ${DIRSHELL}/${FILELIST} || return 2
-done
+   cp -a ${PWD}/. ${DIRSHELL}/
 }
 
 fFILERUN(){
-for FILERUN in $FILELIST 
-do
-   case $FILELIST in
-   [updates.sh]|[dist-upgrade.sh]) 
-   ${DIRSHELL}/${FILELIST} || return 3
-   ;;
-   esac
-done
+
+   ${DIRSHELL}/${DISTUPGRADE} || return 4
 }
 
 fMail(){
- if [ $? -ne 0 ]
-   then
-      echo "mail error"
-      $MAIL -s "Error with ${HOSTNAME} during initSetup.sh." $TO || return 4
-fi
+   if [ $? -ne 0 ]
+      then
+         echo "mail error"
+         $MAIL -s "Error with ${HOSTNAME} during initSetup.sh." $TO || return 5
+   fi
 }
 
-fGETADDONS(){
-   ${DIRSHELL}/$FILEADDON
+fADDON(){
+   for ADDON in htop mailutils;
+   do
+      apt-get install $ADDON --assume-yes || return 6
+   done
 }
+
+fADDON
 fMKDIR
 fMVFILE
-fGETADDONS
 fFILERUN
 fMail
 
 exit 0
+             
