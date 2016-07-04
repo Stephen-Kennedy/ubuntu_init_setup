@@ -1,4 +1,4 @@
-!/bin/bash
+#!/bin/bash
 #This script allows for dist-upgrade - auto-remove
 #Author: Stephen J Kennedy
 #version 1.1
