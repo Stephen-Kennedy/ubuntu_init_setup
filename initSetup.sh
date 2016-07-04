@@ -9,7 +9,7 @@ DIRCUSTOM=/bin/custom
 DIRCUSTOMLOG=${DIRCUSTOM}/log
 DIRSHELL=${DIRCUSTOM}/shell
 FILEADDON=addonInstall.sh
-DISTUPGRADE=auto_dist_upgrade.sh
+DISTUPGRADE=autoDistUpgrade.sh
 PWD=$(pwd)
 
 #function to check and see if directory exists.
