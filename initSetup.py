@@ -7,7 +7,7 @@ import apt
 
 def install_default():
   os.system('apt -y update')
-  cache = apt.cache() # get the current installed packages from apt
+  cache = apt.Cache() # get the current installed packages from apt
   programs = ['vim', 'dnsutils', 'ccze', 'iftop', 'htop', 'curl', 'openssh-client']
 
   for program in programs:
