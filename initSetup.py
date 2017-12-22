@@ -3,7 +3,7 @@
 # Version 1.0
 # Script for installing default packages with Python
 import os
-impoty apt
+import apt
 
 def install_default():
   os.system('apt -y update')
