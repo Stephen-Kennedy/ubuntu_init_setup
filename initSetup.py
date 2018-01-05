@@ -9,7 +9,7 @@ def install_default():
   os.system('apt -y update')
   cache = apt.Cache() # get the current installed packages from apt
   programs = ['vim', 'dnsutils', 'ccze', 'iftop', 'htop', 'curl', 'openssh-server', 'openssh-client', 'iptables-persistent', 
-             'python-paramiko', 'python-pexpect']
+             'python-pip']
 
   for program in programs:
     if cache["%s" % program].is_installed:
