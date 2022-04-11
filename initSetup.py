@@ -17,4 +17,5 @@ def install_default():
             print(f'Installing {program}')
             os.system(f'apt-get install -y {program}')
 
-install_default()
+install_default()!/usr/bin/python3
+
