@@ -7,7 +7,8 @@ import apt
 
 def install_default():
     cache = apt.Cache() # get the current installed packages from apt
-    programs = ['vim', 'dnsutils', 'ccze', 'iftop', 'htop', 'curl', 'openssh-server', 'openssh-client', 'iptables-persistent', 'python3-pip']
+    programs = ['vim', 'dnsutils', 'ccze', 'iftop', 'htop', 'curl', 'openssh-server', 'openssh-client', 
+                'iptables-persistent', 'python3-pip']
 
     for program in programs:
         if cache[program].is_installed:
